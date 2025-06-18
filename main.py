@@ -1,6 +1,7 @@
 from turtle import Turtle, Screen
 from player1 import Paddle1
 from player2 import Paddle2
+from ball import Ball
 
 my_screen = Screen()
 my_screen.setup(height = 1500, width = 1500)
@@ -25,6 +26,7 @@ while int(border_line.ycor()) < 1050:
 
 player1 = Paddle1()
 player2 = Paddle2()
+ball = Ball()
 
 
 def move_up():
@@ -55,3 +57,4 @@ my_screen.update()
 
 
 my_screen.exitonclick()
+
