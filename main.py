@@ -1,6 +1,7 @@
 from turtle import Turtle, Screen
 from paddle import Paddle
 from ball import Ball
+from scoreboard import Scoreboard
 import time
 
 game_is_on = True
@@ -30,6 +31,8 @@ while int(border_line.ycor()) < 1050:
 player1 = Paddle((-1220, 0))
 player2 = Paddle((1220, 0))
 ball = Ball()
+player1_score = Scoreboard((-612, 690))
+player2_score = Scoreboard((612, 690))
 
 
 
@@ -60,6 +63,16 @@ while game_is_on:
             ball.move_x = 20
         elif ball.xcor() > 0:
             ball.move_x = -20
+    if ball.xcor() > 1260:
+        player1_score.clear_score()
+        player1_score.score_update()
+        ball.goto(0, 0)
+
+    elif ball.xcor() < -1260:
+        player2_score.clear_score()
+        player2_score.score_update()
+        ball.goto(0,0)
+
 
 
 
