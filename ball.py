@@ -8,8 +8,8 @@ class Ball(Turtle):
         self.turtlesize(2, 2)
         self.penup()
         self.goto(0, 0)
-        self.move_x = random.randint(-10, 10)
-        self.move_y = random.randint(-10, 10)
+        self.move_x = 10
+        self.move_y = 10
 
     def move(self):
         new_x = self.xcor() + self.move_x
