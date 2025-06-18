@@ -1,0 +1,14 @@
+# created by virtualenv automatically
+# Ignore PyCharm project files
+.idea/
+*.iml
+
+# Ignore Python virtual environment folder
+.venv/
+
+# Optional: Ignore Python cache files
+__pycache__/
+*.py[cod]
+
+# Optional: Ignore other common files
+*.log
