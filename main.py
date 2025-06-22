@@ -44,25 +44,13 @@ my_screen.onkey(player2.go_down, "Down")
 
 
 while game_is_on:
-    time.sleep(0.02)
+    time.sleep(0.03)
     ball.move()
-    my_screen.update()
-    if ball.ycor() > 720 and ball.xcor() > 0:
-        ball.move_y = -10
-    elif ball.ycor() > 720 and ball.xcor() < 0:
-        ball.move_y = -10
-        ball.move_x = -10
-    elif ball.ycor() < -720 and ball.xcor() > 0:
-        ball.move_x = 10
-        ball.move_y = 10
-    elif ball.ycor() < -720 and ball.xcor() < 0:
-        ball.move_x = -10
-        ball.move_y = 10
-    if player1.distance(ball) < 60 or player2.distance(ball) < 60:
-        if ball.xcor() < 0:
-            ball.move_x = 20
-        elif ball.xcor() > 0:
-            ball.move_x = -20
+    if ball.ycor() > 720 or ball.ycor() < -720:
+        ball.bounce_y()
+    if player2.distance(ball) < 50 and ball.xcor() > 1210:
+        ball.bounce_x()
+    #Still need to work out the logic of the bouncing ball
     if ball.xcor() > 1260:
         player1_score.clear_score()
         player1_score.score_update()
@@ -72,6 +60,8 @@ while game_is_on:
         player2_score.clear_score()
         player2_score.score_update()
         ball.goto(0,0)
+
+    my_screen.update()
 
 
 
