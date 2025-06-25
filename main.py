@@ -2,6 +2,7 @@ from turtle import Turtle, Screen
 from paddle import Paddle
 from ball import Ball
 from scoreboard import Scoreboard
+from power_bar import Bar
 import time
 
 game_is_on = True
@@ -12,6 +13,7 @@ my_screen.bgcolor("black")
 my_screen.title("Pong")
 my_screen.tracer(0)
 
+#Write the borderline
 border_line = Turtle()
 border_line.hideturtle()
 border_line.pensize(10)
@@ -19,6 +21,28 @@ border_line.penup()
 border_line.color("white")
 border_line.goto(0, -1000)
 border_line.setheading(90)
+
+#Draw the power bar for each paddle (930, -740), (-930, -740)
+def draw_bar(pos, width = 40, length = 600):
+    frame = Turtle()
+    frame.pensize()
+    frame.hideturtle()
+    frame.penup()
+    frame.color("white")
+    frame.goto(pos)
+    frame.setheading(90)
+    frame.pendown()
+
+    for line in range(2):
+        frame.forward(width)
+        frame.left(90)
+        frame.forward(length)
+        frame.left(90)
+    return frame
+
+bar1 = draw_bar((930, -740))
+bar2 = draw_bar((-330, -740))
+
 
 
 
@@ -30,6 +54,8 @@ while int(border_line.ycor()) < 1050:
 
 player1 = Paddle((-1220, 0))
 player2 = Paddle((1220, 0))
+# power_bar1 = Bar((-612, -720))
+# power_bar2 = Bar((612, -720))
 ball = Ball()
 player1_score = Scoreboard((-612, 690))
 player2_score = Scoreboard((612, 690))
@@ -52,6 +78,7 @@ while game_is_on:
         ball.bounce_x()
     if player1.xcor() < ball.xcor() < player1.xcor() + 20 and player1.ycor() - 100 < ball.ycor() < player1.ycor() + 100:
         ball.bounce_x()
+
     if ball.xcor() > 1260:
         player1_score.clear_score()
         player1_score.score_update()
