@@ -48,9 +48,10 @@ while game_is_on:
     ball.move()
     if ball.ycor() > 720 or ball.ycor() < -720:
         ball.bounce_y()
-    if player2.distance(ball) < 50 and ball.xcor() > 1210:
+    if player2.xcor() - 20 < ball.xcor() < player2.xcor() and player2.ycor() - 100 < ball.ycor() < player2.ycor() + 100:
         ball.bounce_x()
-    #Still need to work out the logic of the bouncing ball
+    if player1.xcor() < ball.xcor() < player1.xcor() + 20 and player1.ycor() - 100 < ball.ycor() < player1.ycor() + 100:
+        ball.bounce_x()
     if ball.xcor() > 1260:
         player1_score.clear_score()
         player1_score.score_update()
