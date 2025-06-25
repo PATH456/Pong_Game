@@ -8,15 +8,24 @@ class Paddle(Turtle):
         self.turtlesize(stretch_len=2, stretch_wid=10)
         self.penup()
         self.goto(pos)
+        self.move_y = 40
 
 
 
     def go_up(self):
-        self.sety(self.ycor() + 40)
+        if self.ycor() < 630:
+            self.move_y = 40
+            self.sety(self.ycor() + self.move_y)
+        else:
+            self.move_y = 0
+
 
     def go_down(self):
-        self.sety(self.ycor() - 40)
-
+        if self.ycor() > -630:
+            self.move_y = 40
+            self.sety(self.ycor() - self.move_y)
+        else:
+            self.move_y = 0
 
 
 

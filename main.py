@@ -6,6 +6,8 @@ from power_bar import Bar
 import time
 
 game_is_on = True
+power_pos1 = -880
+power_pos2 = 380
 
 my_screen = Screen()
 my_screen.setup(height = 1500, width = 2500)
@@ -54,8 +56,8 @@ while int(border_line.ycor()) < 1050:
 
 player1 = Paddle((-1220, 0))
 player2 = Paddle((1220, 0))
-# power_bar1 = Bar((-612, -720))
-# power_bar2 = Bar((612, -720))
+# power_bar1 = Bar((-950, -720))
+# power_bar2 = Bar((350, -720))
 ball = Ball()
 player1_score = Scoreboard((-612, 690))
 player2_score = Scoreboard((612, 690))
@@ -82,11 +84,15 @@ while game_is_on:
     if ball.xcor() > 1260:
         player1_score.clear_score()
         player1_score.score_update()
+        power_bar1 = Bar((power_pos1, -720))
+        power_pos1 += 100
         ball.goto(0, 0)
 
     elif ball.xcor() < -1260:
         player2_score.clear_score()
         player2_score.score_update()
+        power_bar1 = Bar((power_pos2, -720))
+        power_pos2 += 100
         ball.goto(0,0)
 
     my_screen.update()
