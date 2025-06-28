@@ -9,6 +9,7 @@ class Paddle(Turtle):
         self.penup()
         self.goto(pos)
         self.move_y = 40
+        self.move_x = 40
 
 
 
@@ -26,6 +27,9 @@ class Paddle(Turtle):
             self.sety(self.ycor() - self.move_y)
         else:
             self.move_y = 0
+
+    def smash(self):
+        self.setx(self.xcor() + self.move_x)
 
 
 

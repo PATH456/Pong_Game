@@ -8,6 +8,8 @@ import time
 game_is_on = True
 power_pos1 = -880
 power_pos2 = 380
+full_bar1 = -280
+full_bar2 = 980
 
 my_screen = Screen()
 my_screen.setup(height = 1500, width = 2500)
@@ -84,16 +86,33 @@ while game_is_on:
     if ball.xcor() > 1260:
         player1_score.clear_score()
         player1_score.score_update()
-        power_bar1 = Bar((power_pos1, -720))
-        power_pos1 += 100
+        if power_pos1 < full_bar1:
+            power_bar1 = Bar((power_pos1, -720))
+            power_pos1 += 100
+        ball.move_x = 15
         ball.goto(0, 0)
 
     elif ball.xcor() < -1260:
         player2_score.clear_score()
         player2_score.score_update()
-        power_bar1 = Bar((power_pos2, -720))
-        power_pos2 += 100
+        if power_pos2 < full_bar2:
+            power_bar2 = Bar((power_pos2, -720))
+            power_pos2 += 100
+        ball.move_x = 15
         ball.goto(0,0)
+
+    if power_pos1 == full_bar1:
+        my_screen.onkey(player1.smash, "d")
+        if player1.xcor() > -1220:
+            player1.setx(player1.xcor() - player1.move_x)
+            ball.move_x *= 2
+    elif power_pos2 == full_bar2:
+        my_screen.onkey(player2.smash, "Left")
+        if player2.xcor() < 1220:
+            #Still need to work on the logic of the smashing paddle, it needs to get back to previous x_position after smashing
+            player2.setx(player2.xcor() + player2.move_x)
+
+            ball.move_x *= 2
 
     my_screen.update()
 
