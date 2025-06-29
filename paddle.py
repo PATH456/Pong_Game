@@ -29,9 +29,10 @@ class Paddle(Turtle):
             self.move_y = 0
 
     def smash(self):
-        self.setx(self.xcor() + self.move_x)
-
-
+        if self.xcor() < 0:
+            self.setx(self.xcor() + self.move_x)
+        else:
+            self.setx(self.xcor() - self.move_x)
 
 
 

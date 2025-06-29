@@ -78,9 +78,9 @@ while game_is_on:
     ball.move()
     if ball.ycor() > 720 or ball.ycor() < -720:
         ball.bounce_y()
-    if player2.xcor() - 20 < ball.xcor() < player2.xcor() and player2.ycor() - 100 < ball.ycor() < player2.ycor() + 100:
+    if player2.xcor() - 20 < ball.xcor() < player2.xcor() + 200 and player2.ycor() - 100 < ball.ycor() < player2.ycor() + 100:
         ball.bounce_x()
-    if player1.xcor() < ball.xcor() < player1.xcor() + 20 and player1.ycor() - 100 < ball.ycor() < player1.ycor() + 100:
+    if player1.xcor() - 200 < ball.xcor() < player1.xcor() + 20 and player1.ycor() - 100 < ball.ycor() < player1.ycor() + 100:
         ball.bounce_x()
 
     if ball.xcor() > 1260:
@@ -89,7 +89,6 @@ while game_is_on:
         if power_pos1 < full_bar1:
             power_bar1 = Bar((power_pos1, -720))
             power_pos1 += 100
-        ball.move_x = 15
         ball.goto(0, 0)
 
     elif ball.xcor() < -1260:
@@ -98,22 +97,23 @@ while game_is_on:
         if power_pos2 < full_bar2:
             power_bar2 = Bar((power_pos2, -720))
             power_pos2 += 100
-        ball.move_x = 15
         ball.goto(0,0)
 
     if power_pos1 == full_bar1:
         my_screen.onkey(player1.smash, "d")
         if player1.xcor() > -1220:
+            player1.move_x = 1
             player1.setx(player1.xcor() - player1.move_x)
-            ball.move_x *= 2
+        else:
+            player1.move_x = 40
     elif power_pos2 == full_bar2:
         my_screen.onkey(player2.smash, "Left")
         if player2.xcor() < 1220:
-            #Still need to work on the logic of the smashing paddle, it needs to get back to previous x_position after smashing
+            # Need to build the logic to reset the energy bar
+            player2.move_x = 1
             player2.setx(player2.xcor() + player2.move_x)
-
-            ball.move_x *= 2
-
+        else:
+            player2.move_x = 40
     my_screen.update()
 
 
