@@ -10,6 +10,8 @@ power_pos1 = -880
 power_pos2 = 380
 full_bar1 = -280
 full_bar2 = 980
+energy_bar1 = []
+energy_bar2 = []
 
 my_screen = Screen()
 my_screen.setup(height = 1500, width = 2500)
@@ -71,6 +73,8 @@ my_screen.onkey(player1.go_up, "w")
 my_screen.onkey(player1.go_down, "s")
 my_screen.onkey(player2.go_up, "Up")
 my_screen.onkey(player2.go_down, "Down")
+my_screen.onkey(player1.smash, "d")
+my_screen.onkey(player2.smash, "Left")
 
 
 while game_is_on:
@@ -88,6 +92,7 @@ while game_is_on:
         player1_score.score_update()
         if power_pos1 < full_bar1:
             power_bar1 = Bar((power_pos1, -720))
+            energy_bar1.append(power_bar1)
             power_pos1 += 100
         ball.goto(0, 0)
 
@@ -96,25 +101,37 @@ while game_is_on:
         player2_score.score_update()
         if power_pos2 < full_bar2:
             power_bar2 = Bar((power_pos2, -720))
+            energy_bar2.append(power_bar2)
             power_pos2 += 100
         ball.goto(0,0)
 
+    if player1.xcor() > -1220:
+        power_pos1 = -880
+        for bar in energy_bar1:
+            bar.hideturtle()
+        player1.move_x = 1
+        player1.setx(player1.xcor() - player1.move_x)
+    else:
+        player1.move_x = 40
+
     if power_pos1 == full_bar1:
-        my_screen.onkey(player1.smash, "d")
-        if player1.xcor() > -1220:
-            player1.move_x = 1
-            player1.setx(player1.xcor() - player1.move_x)
-        else:
-            player1.move_x = 40
-    elif power_pos2 == full_bar2:
-        my_screen.onkey(player2.smash, "Left")
-        if player2.xcor() < 1220:
-            # Need to build the logic to reset the energy bar
-            player2.move_x = 1
-            player2.setx(player2.xcor() + player2.move_x)
-        else:
-            player2.move_x = 40
+        player1.energy_full = True
+
+    if player2.xcor() < 1220:
+        power_pos2 = 380
+        for bar in energy_bar2:
+            bar.hideturtle()
+        player2.move_x = 1
+        player2.setx(player2.xcor() + player2.move_x)
+    else:
+        player2.move_x = 40
+
+    if power_pos2 == full_bar2:
+        player2.energy_full = True
     my_screen.update()
+
+    #Need to adjust the collision logic between the ball and the paddle
+    #Need to add the logic of high speed ball after smashing
 
 
 
