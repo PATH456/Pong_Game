@@ -82,30 +82,39 @@ while game_is_on:
     ball.move()
     if ball.ycor() > 720 or ball.ycor() < -720:
         ball.bounce_y()
-    if player2.xcor() - 20 < ball.xcor() < player2.xcor() + 200 and player2.ycor() - 100 < ball.ycor() < player2.ycor() + 100:
+    if player2.xcor() - 20 < ball.xcor() < player2.xcor() + 40 and player2.ycor() - 100 < ball.ycor() < player2.ycor() + 100:
         ball.bounce_x()
-    if player1.xcor() - 200 < ball.xcor() < player1.xcor() + 20 and player1.ycor() - 100 < ball.ycor() < player1.ycor() + 100:
+    if player1.xcor() - 40 < ball.xcor() < player1.xcor() + 20 and player1.ycor() - 100 < ball.ycor() < player1.ycor() + 100:
         ball.bounce_x()
+    #Check the logic here
 
     if ball.xcor() > 1260:
         player1_score.clear_score()
         player1_score.score_update()
+        ball.move_x = 15
         if power_pos1 < full_bar1:
             power_bar1 = Bar((power_pos1, -720))
             energy_bar1.append(power_bar1)
             power_pos1 += 100
         ball.goto(0, 0)
+        print(power_pos1)
 
     elif ball.xcor() < -1260:
         player2_score.clear_score()
         player2_score.score_update()
+        ball.move_x = 15
         if power_pos2 < full_bar2:
             power_bar2 = Bar((power_pos2, -720))
             energy_bar2.append(power_bar2)
             power_pos2 += 100
         ball.goto(0,0)
 
+    if power_pos1 == full_bar1:
+        player1.energy_full = True
+
     if player1.xcor() > -1220:
+        if player1.energy_full:
+            ball.move_x = 80
         power_pos1 = -880
         for bar in energy_bar1:
             bar.hideturtle()
@@ -114,10 +123,12 @@ while game_is_on:
     else:
         player1.move_x = 40
 
-    if power_pos1 == full_bar1:
-        player1.energy_full = True
+    if power_pos2 == full_bar2:
+        player2.energy_full = True
 
     if player2.xcor() < 1220:
+        if player2.energy_full:
+            ball.move_x = -80
         power_pos2 = 380
         for bar in energy_bar2:
             bar.hideturtle()
@@ -126,8 +137,6 @@ while game_is_on:
     else:
         player2.move_x = 40
 
-    if power_pos2 == full_bar2:
-        player2.energy_full = True
     my_screen.update()
 
     #Need to adjust the collision logic between the ball and the paddle
