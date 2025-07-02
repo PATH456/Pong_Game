@@ -8,8 +8,8 @@ class Ball(Turtle):
         self.turtlesize(2, 2)
         self.penup()
         self.goto(0, 0)
-        self.move_x = 15
-        self.move_y = 15
+        self.move_x = 20
+        self.move_y = 20
 
     def move(self):
         new_x = self.xcor() + self.move_x
