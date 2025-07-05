@@ -1,5 +1,4 @@
 from turtle import Turtle
-import random
 class Ball(Turtle):
     def __init__(self):
         super().__init__()
@@ -10,6 +9,7 @@ class Ball(Turtle):
         self.goto(0, 0)
         self.move_x = 20
         self.move_y = 20
+        self.did_bounce = False
 
     def move(self):
         new_x = self.xcor() + self.move_x
@@ -21,3 +21,4 @@ class Ball(Turtle):
 
     def bounce_x(self):
         self.move_x *= -1
+        self.did_bounce = True
